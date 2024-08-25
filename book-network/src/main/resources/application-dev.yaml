@@ -6,10 +6,11 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto:
+      ddl-auto: update
     show-sql: true
     properties:
-      hi.hibernate.format_sql: true
+      hibernate:
+        format_sql: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   mail:
@@ -34,3 +35,9 @@ application:
     jwt:
       secret-key: H1jLqEKqKHEfwToO
       expiration: 8640000
+  mailing:
+    frontend:
+      activation-url: http://localhost:4200/activate-account
+
+server:
+  port: 8088
