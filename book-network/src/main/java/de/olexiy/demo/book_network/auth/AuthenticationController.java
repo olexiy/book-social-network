@@ -33,5 +33,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.authenticate(request));
     }
 
+    @GetMapping("/activate-account")
+    public void confirm(){
+
+    }
 
 }
