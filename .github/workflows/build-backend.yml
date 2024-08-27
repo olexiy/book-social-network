@@ -21,7 +21,7 @@ jobs:
       - name: Check if backend has changed
         id: backend_changed
         run: |
-          if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep -q '^backend/'; then
+          if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep -q '^book-network/'; then
             echo "result=true" >> $GITHUB_OUTPUT
           else
             echo "result=false" >> $GITHUB_OUTPUT
@@ -46,5 +46,5 @@ jobs:
 
       - name: Build and test backend
         run: |
-          cd backend
+          cd book-network
           ./mvnw clean install

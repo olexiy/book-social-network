@@ -1,6 +1,7 @@
 package de.olexiy.demo.book_network.user;
 
 import de.olexiy.demo.book_network.book.Book;
+import de.olexiy.demo.book_network.history.BookTransactionHistory;
 import de.olexiy.demo.book_network.role.Role;
 import jakarta.persistence.*;
 import lombok.*;
@@ -46,6 +47,8 @@ public class User implements UserDetails, Principal {
     @OneToMany(mappedBy = "owner")
     private List<Book> books;
 
+    @OneToMany(mappedBy = "user")
+    private List<BookTransactionHistory> histories;
 
 
     @CreatedDate

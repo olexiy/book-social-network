@@ -2,6 +2,7 @@ package de.olexiy.demo.book_network.book;
 
 import de.olexiy.demo.book_network.common.BaseEntity;
 import de.olexiy.demo.book_network.feedback.Feedback;
+import de.olexiy.demo.book_network.history.BookTransactionHistory;
 import de.olexiy.demo.book_network.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -35,5 +36,8 @@ public class Book extends BaseEntity {
 
     @OneToMany(mappedBy = "book")
     private List<Feedback> feedbacks;
+
+    @OneToMany(mappedBy = "book")
+    private List<BookTransactionHistory> history;
 
 }
