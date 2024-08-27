@@ -1,0 +1,50 @@
+name: 00 - Main backend CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  detect-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      backend_changed: ${{ steps.backend_changed.outputs.result }}
+      frontend_changed: ${{ steps.frontend_changed.outputs.result }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if backend has changed
+        id: backend_changed
+        run: |
+          if git diff --name-only ${{ github.base_ref }} ${{ github.head_ref }} | grep -q '^backend/'; then
+            echo "result=true" >> $GITHUB_OUTPUT
+          else
+            echo "result=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Check if frontend has changed
+        id: frontend_changed
+        run: echo "result=false" >> $GITHUB_OUTPUT
+
+  build-backend:
+    needs: detect-changes
+    if: needs.detect-changes.outputs.backend_changed == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Build and test backend
+        run: |
+          cd backend
+          ./mvnw clean install
