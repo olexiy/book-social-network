@@ -3,10 +3,10 @@ name: 00 - Main backend CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   detect-changes:
