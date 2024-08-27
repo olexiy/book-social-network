@@ -1,0 +1,1 @@
+[![00 - Main backend CI/CD Pipeline](https://github.com/olexiy/book-social-network/actions/workflows/build-backend.yml/badge.svg)](https://github.com/olexiy/book-social-network/actions/workflows/build-backend.yml)
