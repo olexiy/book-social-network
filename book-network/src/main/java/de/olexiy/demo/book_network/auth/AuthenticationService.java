@@ -108,7 +108,6 @@ public class AuthenticationService {
                 .token(jwt).build();
     }
 
-    @Transactional
     public void activateAccount(String token) throws MessagingException {
         Token savedToken = tokenRepository.findByToken(token)
                 .orElseThrow(()-> new RuntimeException("invalid token."));
