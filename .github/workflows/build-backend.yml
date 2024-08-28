@@ -24,7 +24,7 @@ jobs:
       - name: Build and test backend
         run: |
           cd book-network
-          ./mvnw clean install
+          ./mvnw clean install -DskipTests
 
   test-backend:
     runs-on: ubuntu-latest
