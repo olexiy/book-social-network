@@ -18,8 +18,10 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'corretto'
+          java-version: '21'
+          cache: "maven"
+          cache-dependency-path: "book-network/pom.xml"
 
       - name: Build and test backend
         run: |
@@ -36,8 +38,10 @@ jobs:
       - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
-          java-version: '21'
           distribution: 'corretto'
+          java-version: '21'
+          cache: "maven"
+          cache-dependency-path: "book-network/pom.xml"
 
       - name: Run tests
         run: |
