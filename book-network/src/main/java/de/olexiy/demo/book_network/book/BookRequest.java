@@ -11,7 +11,7 @@ public record BookRequest(
         @NotEmpty(message = "102")
         String isbn,
         String synopsis,
-        boolean sharable
+        boolean shareable
 
 ) {
 }

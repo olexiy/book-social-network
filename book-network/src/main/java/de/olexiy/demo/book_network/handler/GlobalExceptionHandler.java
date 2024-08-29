@@ -1,5 +1,6 @@
 package de.olexiy.demo.book_network.handler;
 
+import de.olexiy.demo.book_network.exception.OperationNotPermitted;
 import jakarta.mail.MessagingException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -91,6 +92,18 @@ public class GlobalExceptionHandler {
                                 .build()
                 );
     }
+
+    @ExceptionHandler(OperationNotPermitted.class)
+    public ResponseEntity<ExceptionResponse> handleException(OperationNotPermitted exp){
+        return ResponseEntity
+                .status(BAD_REQUEST)
+                .body(
+                        ExceptionResponse.builder()
+                                .error(exp.getMessage())
+                                .build()
+                );
+    }
+
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ExceptionResponse> handleException(Exception exp){
