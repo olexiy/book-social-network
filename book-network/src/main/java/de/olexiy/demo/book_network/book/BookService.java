@@ -219,7 +219,5 @@ public class BookService {
         var bookCover = fileStorageService.saveFile(file, user.getId());
         book.setBookCover(bookCover);
         bookRepository.save(book);
-
-
     }
 }
