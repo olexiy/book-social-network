@@ -45,7 +45,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: checkstyle-report
-          path: target/checkstyle-result.xml
+          path: book-network/target/checkstyle-result.xml
 
       - name: Run SpotBugs
         run: mvn spotbugs:check
