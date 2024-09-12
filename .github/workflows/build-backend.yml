@@ -48,14 +48,14 @@ jobs:
       - name: Generate Job report
         run: |
           cd book-network
-          ./mvnw   -f book-network/pom.xml site
+          ./mvnw site
         continue-on-error: true
 
 
       - name: Upload Job Report
         uses: actions/upload-artifact@v4
         with:
-          name: checkstyle-report
+          name: Backend build and test report
           path: book-network/target/site
         if: success()
         continue-on-error: true
@@ -124,3 +124,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: mvn -f book-network/pom.xml -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=olexiy_book-social-network
+  # 4. Snyk Security Scan Job (can run in parallel with other jobs)
+  snyk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/maven-3-jdk-21@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
