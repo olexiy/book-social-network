@@ -47,16 +47,20 @@ jobs:
 
       - name: Generate Job report
         run: mvn  -f book-network/pom.xml site
+        continue-on-error: true
+
 
       - name: Upload Job Report
         uses: actions/upload-artifact@v4
         with:
           name: checkstyle-report
           path: book-network/target/site
+        if: success()
+        continue-on-error: true
 
 
   # 2. Integration Test Job (depends on the build-and-unittest job)
-  test-backend:
+  integration-test:
     runs-on: ubuntu-latest
     needs: build-and-unit-test
     steps:
@@ -86,7 +90,7 @@ jobs:
   # 3. SonarCloud Code Quality Scan Job (runs in parallel with Snyk)
   sonar:
     runs-on: ubuntu-latest
-    needs:  build-and-unit-test  # Ensure code is built before scanning
+    needs:   integration-test  # Ensure code is built before scanning
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
