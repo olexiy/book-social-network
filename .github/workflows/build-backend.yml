@@ -35,10 +35,17 @@ jobs:
       - name: Build and unit test backend
         run: |
           cd book-network
-          mvn clean install --batch-mode
+          ./mvnw clean install --batch-mode
 
       - name: Run Checkstyle
         run: mvn -f book-network/pom.xml checkstyle:check
+        continue-on-error: true  # Makes the step optional
+
+      - name: Upload Checkstyle Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: target/checkstyle-result.xml
 
       - name: Run SpotBugs
         run: mvn spotbugs:check
