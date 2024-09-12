@@ -38,7 +38,7 @@ jobs:
           mvn clean install --batch-mode
 
       - name: Run Checkstyle
-        run: mvn checkstyle:check
+        run: mvn -f book-network/pom.xml checkstyle:check
 
       - name: Run SpotBugs
         run: mvn spotbugs:check
