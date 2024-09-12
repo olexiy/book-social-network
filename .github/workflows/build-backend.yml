@@ -41,15 +41,20 @@ jobs:
         run: mvn -f book-network/pom.xml checkstyle:check
         continue-on-error: true  # Makes the step optional
 
-      - name: Upload Checkstyle Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: checkstyle-report
-          path: book-network/target/checkstyle-result.xml
-
       - name: Run PMD
         run: mvn  -f book-network/pom.xml pmd:check
         continue-on-error: true  # Makes the step optional
+
+      - name: Generate Job report
+        run: mvn  -f book-network/pom.xml site
+
+      - name: Upload Job Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: checkstyle-report
+          path: book-network/target/site
+
+
   # 2. Integration Test Job (depends on the build-and-unittest job)
   test-backend:
     runs-on: ubuntu-latest
@@ -75,5 +80,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Run Integration Tests
-        run: mvn verify
+        run: |
+          cd book-network
+          ./mvnw verify
 
