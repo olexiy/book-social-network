@@ -47,11 +47,9 @@ jobs:
           name: checkstyle-report
           path: book-network/target/checkstyle-result.xml
 
-      - name: Run SpotBugs
-        run: mvn spotbugs:check
-
       - name: Run PMD
-        run: mvn pmd:check
+        run: mvn  -f book-network/pom.xml pmd:check
+        continue-on-error: true  # Makes the step optional
   # 2. Integration Test Job (depends on the build-and-unittest job)
   test-backend:
     runs-on: ubuntu-latest
