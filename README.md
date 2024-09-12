@@ -2,6 +2,8 @@
 
 [![00 - Main backend CI/CD Pipeline](https://github.com/olexiy/book-social-network/actions/workflows/build-backend.yml/badge.svg)](https://github.com/olexiy/book-social-network/actions/workflows/build-backend.yml)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=olexiy_book-social-network&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=olexiy_book-social-network)
+[![Known Vulnerabilities](https://snyk.io/test/github/olexiy/book-social-network/badge.svg)](https://snyk.io/test/github/olexiy/book-social-network)
+
 ## Overview
 
 Book Social Network is a Java-based application that allows users to manage and share their book collections. The project uses Spring Boot for the backend and integrates with various services to provide a comprehensive book management experience.
